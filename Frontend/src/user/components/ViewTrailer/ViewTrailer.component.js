@@ -32,9 +32,13 @@ function ViewTrailer() {
 
   return (
     <>
-      <div className="container flex justify-center my-5">
+      <div className="flex w-full h-full justify-center my-5">
         {trailerData.map((link) => {
-          return <ReactPlayer url={link.trailer_link}></ReactPlayer>;
+          return (
+          <div style={{ width: '1000px', height: '560px' }}>
+          <ReactPlayer controls width="100%" height="100%" url={link.trailer_link}></ReactPlayer>
+          </div>
+          );
         })}
       </div>
     </>

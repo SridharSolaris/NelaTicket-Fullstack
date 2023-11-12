@@ -6,30 +6,21 @@ import { useParams, useNavigate } from "react-router-dom"; // Import useParams
 import { config } from "../../Config"
 import UserContext from "../../context/UserContext";
 
-const Movie = () => {
-  const [moviedata, setMoviedata] = useState({});
+const Moviedup = () => {
+ 
   const navigate = useNavigate();
   const { id } = useParams(); // Get the id parameter from the URL
-
-  useEffect(() => {
-    const fetchMovieData = async () => {
-
-        const response = await axios.get(`/movie/${id}`);
-        setMoviedata(response.data);
-    };
-    fetchMovieData();
-  }, [id]); // Include id in the dependency array to fetch data when id changes
-  console.log({moviedata})
 
   const userContextData = useContext(UserContext);
 
   const [movieData, setMovieData] = useState([]);
   const getMovies = async () => {
     try {
-      const movies = await axios.get(`${config.api}/movies/allmovies`);
+      const movies = await axios.get(`${config.api}/movies/viewdetails/${id}`);
+      console.log(movies);
       if (movies) {
-        setMovieData(movies.data.newmve);
-        console.log(movies.data.newmve);
+        setMovieData(movies.data.newmve[0]);
+        console.log(movies.data.newmve[0]);
 
         // toast.success("Success");
       } else {
@@ -47,11 +38,11 @@ const Movie = () => {
   return (
     <>
       <div>
-        <MovieHero bp={moviedata.backdrop_path} sl={moviedata.original_language} s={moviedata.status} r={moviedata.vote_average} vc={moviedata.vote_count} ot={moviedata.original_title} pp={moviedata.poster_path} id={id} />
+        <MovieHero tl={movieData.trailer_link} bp={movieData.mve_backdrop} sl={movieData.original_language} s={movieData.release_date} r={movieData.vote_average} vc={movieData.vote_count} ot={movieData.mve_name} pp={movieData.mve_poster} id={id} />
         <div className="my-12 container mx-auto px-4 lg:w-1/2 lg:ml-64">
           <div className="flex flex-col items-start gap-3">
             <h2 className="text-gray-800 font-bold text-2xl">About the movie</h2>
-            <p>{moviedata.overview}</p> {/* Use overview from moviedata */}
+            <p>{movieData.description}</p> {/* Use overview from moviedata */}
           </div>
 
           <div className="my-8">
@@ -80,5 +71,5 @@ const Movie = () => {
 };
 
 
-export default Movie;
+export default Moviedup;
 

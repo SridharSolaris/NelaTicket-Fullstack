@@ -1,8 +1,11 @@
-import React from "react";
+import {React,useState} from "react";
 import { BiChevronRight, BiStar, BiShareAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import Modal from "../Modal";
 
  const MovieHero = (props) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const launchRazorPay = () => {
         let options = {
             key:"rzp_test_BRVxWrSVhyKh1m",
@@ -69,18 +72,19 @@ import { useNavigate } from "react-router-dom";
                         </div>
                         <div>
                             <button
-                            onClick={() => navigate(`/booking`)}
+                            onClick={() => setIsModalOpen(true)}
                             className="mx-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 max-w-max rounded"
                             >
                                 Book Tickets
                             </button>
                             {console.log(props.id)}
                             <button 
-                            onClick={() => navigate(`/trailer/${props._id}`)}
+                            onClick={() => navigate(`/trailer/${props.id}`)}
                             className="mx-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 max-w-max rounded"
                             >
                                 Show Trailer
                             </button>
+                            {isModalOpen && <Modal setOpen={setIsModalOpen} />}
                         </div>
                         
                     </div>

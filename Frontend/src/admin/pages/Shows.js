@@ -65,7 +65,7 @@ function Shows() {
         <div className="flex justify-between mb-2">
           <h3>Shows</h3>
           <button
-            onClick={() => navigate("/portal/movies")}
+            onClick={() => navigate("/movies")}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-sm"
           >
             Back

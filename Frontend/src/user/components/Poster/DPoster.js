@@ -1,20 +1,20 @@
 import React from 'react';
 //props -> src, title,subtitle, isDark(bool), isCircle(bool)
-const Poster = (props) => {
+const DPoster = (props) => {
 
   return (
     <>
-      <a href={`/${props.path}/${props.id}`}>
+      <a href={`/${props.path}/${props._id}`}>
         <div
-          className={`flex flex-col  gap-2 px-2  ${
+          className={`flex flex-col gap-2 px-2  ${
             props.isCircle ? 'item-center max-w-max ' : 'items-start'
           } `}
         >
           <div className={`${props.isCircle ? 'h-40' : 'h-80'} `}>
             <img
               key={props.alt}
-              src={`http://image.tmdb.org/t/p/original/${props.poster_path}`}
-              alt={props.original_title}
+              src={`${props.mve_poster}`}
+              alt={props.mve_name}
               className={`${
                 props.isCircle
                   ? 'rounded-full h-40 w-40 flex items-center justify-center'
@@ -32,7 +32,7 @@ const Poster = (props) => {
                 props.isDark ? 'text-white' : 'text-gray-700'
               }`}
             >
-              {props.title}
+              {props.mve_name}
             </h3>
             <p
               className={`text-sm font-bold ${
@@ -48,4 +48,4 @@ const Poster = (props) => {
   );
 };
 
-export default Poster;
+export default DPoster;

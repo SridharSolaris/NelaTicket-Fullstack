@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {config} from "../../Config";
-import PlayPoster from "../components/Poster/playPoster.component";
+import Poster from "../components/Poster/poster.component";
 import { useNavigate } from "react-router-dom";
 
 function Allmovies() {
@@ -30,19 +30,20 @@ function Allmovies() {
     <>
     <div className="w-full lg:flex lg:flex-row-reverse">
       <div className="w-8/12">
-        <h2 className="text-2xl font-bold mb-4">TV Series</h2>
+        <h2 className="text-2xl font-bold mb-4">All Movies</h2>
         <div className="flex flex-wrap">
             {movieData.map((movie) => (
                 <div className="w-1/2 md:w-1/3 my-3 lg:w-1/4">
-                    <PlayPoster 
+                    <Poster 
                     id={movie._id}
                     poster_path={movie.mve_poster}
                     title={movie.mve_name}
                     subtitle={movie.vote_average}
+                    path="moviedup"
                     />
                     <button
                     onClick={() =>
-                        navigate(`/movie/${movie._id}`)
+                        navigate(`/moviedup/${movie._id}`)
                     }
                     className="btn btn-primary">
                         View Details

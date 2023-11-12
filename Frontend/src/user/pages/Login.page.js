@@ -36,6 +36,12 @@ export default function Login() {
           userContextData.setUser(login.data.name);
           const role = await localStorage.getItem("role");
           console.log(role);
+          
+          localStorage.setItem('isAuthenticated', 'true');
+          // Example: Check local storage for authentication state
+          
+
+
 
           {
             role == "admin" ? navigate("/dashboard") : navigate("/");

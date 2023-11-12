@@ -42,7 +42,18 @@ const NavLg = () => {
 
     const userContextData = useContext(UserContext);
 
+   
+
+
+// Example: Check local storage for authentication state
+const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+userContextData.setIsvisible(isAuthenticated);
+
+
+
     const home = () => {
+        
+        
         userContextData.setIsvisible(false);
         localStorage.clear();
         navigate("/");
@@ -86,7 +97,7 @@ const NavLg = () => {
                   <>
                     <NavLink
                     className="rounded-lg px-3 py-2 text-red-700 font-medium hover:bg-indigo-300 hover:text-slate-900"
-                    to={"/mainpage/mybookings"}
+                    to={"/mybookings"}
                     >
                         My Bookings
                     </NavLink>

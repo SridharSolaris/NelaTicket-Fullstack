@@ -2,9 +2,9 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { config } from "./../Config";
+import { config } from "../../Config";
 import { toast } from "react-toastify";
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 
 function Booknow({ mve_id }) {
   const userContextData = useContext(UserContext);
@@ -84,7 +84,7 @@ function Booknow({ mve_id }) {
 
         userContextData.setBookingDetails(bookings.data);
 
-        navigate("/mainpage/seatbooking/");
+        navigate("/booking");
       } catch (error) {
         console.log(error);
         // alert(error.response.data.message);

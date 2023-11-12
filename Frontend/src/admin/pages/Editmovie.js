@@ -38,6 +38,7 @@ function Editmovie() {
       certificate: "",
       trailer_link: "",
       mve_poster: "",
+      mve_backdrop: "",
       description: "",
     },
     validationSchema: yup.object({
@@ -49,6 +50,7 @@ function Editmovie() {
       certificate: yup.string().required().min(1),
       trailer_link: yup.string().url().required(),
       mve_poster: yup.string().url().required(),
+      mve_backdrop: yup.string().url().required(),
       description: yup.string().required().min(10),
     }),
 
@@ -219,6 +221,23 @@ function Editmovie() {
               </tr>
 
               <tr>
+                <th>Movie Backdrop</th>
+                <td>
+                  <input
+                    name="mve_backdrop"
+                    type="text"
+                    className="form-control"
+                    value={formik.values.mve_backdrop}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  ></input>
+                  {formik.touched.mve_backdrop && formik.errors.mve_backdrop
+                    ? formik.errors.mve_backdrop
+                    : null}
+                </td>
+              </tr>
+
+              <tr>
                 <th>Description</th>
                 <td>
                   <textarea
@@ -241,7 +260,7 @@ function Editmovie() {
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-3"
               type="submit"
             >
-              Edit Movie
+              Save Changes
             </button>
           </div>
         </form>

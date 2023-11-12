@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import {config} from "../../Config";
+import axios from "axios";
 
 function Bookings() {
+  const [bookingsData,setBookingsData] = useState([])
+
+  const getBookings = async () => {
+    try {
+      const bookings = await axios.get(`${config.api}/bookings/booked`);
+      if (bookings) {
+        setBookingsData(bookings)
+        toast.success("Success");
+      } else {
+        toast.error("Movies not found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getBookings();
+  }, []);
+  console.log(bookingsData)
   return (
     <>
       <div className="flex justify-between mb-2">
         <h3>Bookings</h3>
-        <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-sm" to="/portal/movies">
+        <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-sm" to="/movies">
           Back
         </Link>
       </div>

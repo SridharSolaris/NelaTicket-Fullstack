@@ -18,6 +18,7 @@ import Login from "./user/pages/Login.page";
 import SignUp from "./user/pages/SignUp.page";
 import ViewTrailer from "./user/components/ViewTrailer/ViewTrailer.component";
 import Allmovies from "./user/pages/AllMovies";
+import Moviedup from "./user/pages/moviedup";
 
 
 import Dashboard from "./admin/components/Dashboard";
@@ -30,6 +31,7 @@ import Query from "./admin/pages/Query";
 import Theatre from "./admin/pages/Theatre";
 import Users from "./admin/pages/Users";
 import Seatbooking from "./user/pages/Seatbooking";
+import Mybookings from "./user/pages/MyBookings";
 
 
 
@@ -48,11 +50,13 @@ function App() {
     <DefaultHOC path="/" exact Component={HomePage} />
 
     <UserHOC path="/movie/:id" exact Component={Movie} />
+    <UserHOC path="/moviedup/:id" exact Component={Moviedup}/>
     <UserHOC path="/plays" exact Component={Plays} />
     <UserHOC path="/tv/:id" exact Component={Shows} />
     <UserHOC path="/trailer/:id" exact Component={ViewTrailer} />
     <UserHOC path="/allmovies" exact Component={Allmovies} />
     <UserHOC path="/booking" exact Component={Seatbooking} />
+    <UserHOC path="/mybookings" exact Component={Mybookings} />
 
 
     <AdminHOC path="/dashboard" exact Component={Dashboard} />

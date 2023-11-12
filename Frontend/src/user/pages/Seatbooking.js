@@ -32,13 +32,14 @@ function Seatbooking(props) {
   const launchRazorPay = () => {
     let options = {
         key:"rzp_test_BRVxWrSVhyKh1m",
-        amount: 500*100,
+        amount: 110*100,
         currency: "INR",
-        name: `${props.ot}`,
+        name: `${props.mve_name}`,
         description: "Movie purchase on Rental",
-        image: `${props.pp}`,
+        image: `${props.mve_poster}`,
         handler: () => {
             alert("Payment Done")
+            navigate("/")
         },
         theme: {color: "#c4242d"}
     };
@@ -67,7 +68,7 @@ function Seatbooking(props) {
         // console.log(bookings.data);
 
         // alert(bookings.data.message);
-        navigate("/");
+        
       } catch (error) {
         console.log(error);
         // alert(error.response.data.message);
@@ -273,17 +274,17 @@ function Seatbooking(props) {
             </div>
           </div>
 
-          <div className="col-lg-6">
-            <form onSubmit={formik.handleSubmit}>
-              <table className="table">
+          <div className="col-lg-6 bg-dark-800 mt-16">
+            <form onSubmit={formik.handleSubmit} >
+              <table className="table-auto">
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <th scope="col">Booking Date</th>
+                    <th className="w-1/4" scope="col">Booking Date</th>
                     <td>
                       <input
                         name="book_date"
-                        type="text"
+                        type="date"
                         className="form-control"
                         value={formik.values.book_date}
                         onChange={formik.handleChange}
@@ -292,7 +293,7 @@ function Seatbooking(props) {
                     </td>
                   </tr>
                   <tr>
-                    <th scope="col">Theatre Name</th>
+                    <th className="w-1/4" scope="col">Theatre Name</th>
                     <td>
                       <input
                         name="theatre_name"
@@ -305,7 +306,7 @@ function Seatbooking(props) {
                     </td>
                   </tr>
                   <tr>
-                    <th scope="col">show Name</th>
+                    <th className="w-1/4" scope="col">show Name</th>
                     <td>
                       <input
                         name="show_name"
@@ -318,7 +319,7 @@ function Seatbooking(props) {
                     </td>
                   </tr>
                   <tr>
-                    <th scope="col">Ticket Price</th>
+                    <th className="w-1/4" scope="col">Ticket Price</th>
                     <td>
                       <input
                         name="ticket_price"
@@ -331,7 +332,7 @@ function Seatbooking(props) {
                     </td>
                   </tr>
                   <tr>
-                    <th scope="col">Number of Seats</th>
+                    <th className="w-1/4" scope="col">Number of Seats</th>
                     <td>
                       <input
                         name="seat_count"
@@ -343,7 +344,7 @@ function Seatbooking(props) {
                     </td>
                   </tr>
                   <tr>
-                    <th scope="col">Seat Numbers</th>
+                    <th className="w-1/4" scope="col">Seat Numbers</th>
                     <td>
                       <input
                         name="seat_numbers"
@@ -357,7 +358,7 @@ function Seatbooking(props) {
                 </tbody>
               </table>
 
-              <button type="submit" onClick={launchRazorPay}  className="btn btn-success">
+              <button type="submit" onClick={launchRazorPay}  className="btn bg-green-500 text-white hover:bg-green-700">
                 Book Now
               </button>
             </form>

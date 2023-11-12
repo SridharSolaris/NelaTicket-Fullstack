@@ -28,7 +28,7 @@ export async function getmoviebyid(id) {
     .db("bookmyshow")
     .collection("movies")
     .find(
-      { _id: ObjectId(id) },
+      { _id: new ObjectId(`${id}`) },
       {
         projection: {
           _id: 1,
@@ -38,6 +38,7 @@ export async function getmoviebyid(id) {
           actress: 1,
           trailer_link: 1,
           mve_poster: 1,
+          mve_backdrop: 1,
           description: 1,
         },
       }
@@ -50,7 +51,7 @@ export async function getmoviedetailsbyid(id) {
     .db("bookmyshow")
     .collection("movies")
     .find(
-      { _id: ObjectId(id) },
+      { _id: new ObjectId(id) },
       {
         projection: {
           _id: 0,
@@ -65,7 +66,7 @@ export async function getmovietrailer(id) {
     .db("bookmyshow")
     .collection("movies")
     .find(
-      { _id: ObjectId(id) },
+      { _id: new ObjectId(id) },
       {
         projection: {
           _id: 1,
@@ -81,12 +82,12 @@ export async function updatemvebyid(id, data) {
   return await client
     .db("bookmyshow")
     .collection("movies")
-    .updateOne({ _id: ObjectId(id) }, { $set: data })
+    .updateOne({ _id: new ObjectId(id) }, { $set: data })
 }
 
 export async function deletemvebyid(id, data) {
   return await client
     .db("bookmyshow")
     .collection("movies")
-    .deleteOne({ _id: ObjectId(id) });
+    .deleteOne({ _id: new ObjectId(id) });
 }

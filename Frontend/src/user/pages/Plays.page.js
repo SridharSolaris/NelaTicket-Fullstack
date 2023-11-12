@@ -29,7 +29,7 @@ const Plays = () => {
                                 id={image.id}
                                 poster_path={image.poster_path}
                                 title={image.name}
-                                subtitle={image.vote_average}
+                                subtitle={ "Rating: " + image.vote_average + "/10"}
                                 />
                             </div>
                         ))};

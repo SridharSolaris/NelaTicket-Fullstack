@@ -36,3 +36,19 @@ export async function getPrice(theatre_name, show_name) {
       }
     );
 }
+
+export async function getAllBookings() {
+  return await client
+    .db("bookmyshow")
+    .collection("bookings")
+    .find({})
+    .toArray();
+}
+
+export async function getBookingsByEmail(email) {
+  return await client
+    .db("bookmyshow")
+    .collection("bookings")
+    .find({ email: email })
+    .toArray();
+}

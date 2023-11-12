@@ -17,6 +17,7 @@ function Addmovie() {
       certificate: "",
       trailer_link: "",
       mve_poster: "",
+      mve_backdrop: "",
       description: "",
       // mve_banner: "",
     },
@@ -29,6 +30,7 @@ function Addmovie() {
       certificate: yup.string().required().min(1),
       trailer_link: yup.string().url().required(),
       mve_poster: yup.string().url().required(),
+      mve_backdrop: yup.string().url().required(),
       description: yup.string().required().min(10),
     }),
 
@@ -58,7 +60,7 @@ function Addmovie() {
     <>
       <div className="d-flex justify-content-between mb-2">
         <h3>Add New Movie</h3>
-        <Link className="btn btn-primary btn-sm" to="/portal/movies">
+        <Link className="btn btn-primary btn-sm" to="/movies">
           Back
         </Link>
       </div>
@@ -198,6 +200,23 @@ function Addmovie() {
                   ></input>
                   {formik.touched.mve_poster && formik.errors.mve_poster
                     ? formik.errors.mve_poster
+                    : null}
+                </td>
+              </tr>
+
+              <tr>
+                <th>Movie Backdrop</th>
+                <td>
+                  <input
+                    name="mve_backdrop"
+                    type="text"
+                    className="form-control"
+                    value={formik.values.mve_backdrop}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  ></input>
+                  {formik.touched.mve_backdrop && formik.errors.mve_backdrop
+                    ? formik.errors.mve_backdrop
                     : null}
                 </td>
               </tr>
