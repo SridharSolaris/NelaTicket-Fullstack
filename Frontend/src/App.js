@@ -32,6 +32,7 @@ import Theatre from "./admin/pages/Theatre";
 import Users from "./admin/pages/Users";
 import Seatbooking from "./user/pages/Seatbooking";
 import Mybookings from "./user/pages/MyBookings";
+import MovieTicket from "./user/pages/MovieTicket";
 
 
 
@@ -55,8 +56,9 @@ function App() {
     <UserHOC path="/tv/:id" exact Component={Shows} />
     <UserHOC path="/trailer/:id" exact Component={ViewTrailer} />
     <UserHOC path="/allmovies" exact Component={Allmovies} />
-    <UserHOC path="/booking" exact Component={Seatbooking} />
+    <UserHOC path="/booking/:id" exact Component={Seatbooking} />
     <UserHOC path="/mybookings" exact Component={Mybookings} />
+    <UserHOC path="/print/:id" exact Component={MovieTicket} />
 
 
     <AdminHOC path="/dashboard" exact Component={Dashboard} />

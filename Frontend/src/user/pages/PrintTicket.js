@@ -1,11 +1,31 @@
-import React from "react";
-import { Card } from "react-bootstrap/Card";
+import React, { useEffect } from "react";
 import { useContext } from "react";
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import {config} from "../../Config";
+import axios from "axios";
+import MovieTicket from "./MovieTicket";
 
 function PrintTicket() {
-  const { bookingDetails } = useContext(UserContext);
+  const {id} = useParams();
+  const [presentBooking, setPresentBooking] = useState([]);
+
+  const userContextData = useContext(UserContext);
+  const email = localStorage.getItem("email");
+  console.log(userContextData);
+  
+    const currentBookings = async () => {
+      const bookedData = await axios.get(`${config.api}/bookings/booked/${id}`)
+      setPresentBooking(bookedData.data)
+    }
+
+  useEffect(() => {
+    currentBookings();
+  },[])
+  
+
+  
 
   return (
     <>
@@ -14,6 +34,7 @@ function PrintTicket() {
           <div class="col-lg-8">
             <div class="card-body py-5 px-md-5">
               <h3 className="text-center">Booking Details</h3>
+              <MovieTicket />
             </div>
             <div className="col-lg-6 d-flex  text-right">
               <table class="table justify-content-center        ">
@@ -21,27 +42,31 @@ function PrintTicket() {
                 <tbody>
                   <tr>
                     <th scope="col">Movie Name </th>
-                    <td>{bookingDetails.mve_name}</td>
+                    <td>{userContextData.bookingDetails.mve_name}</td>
                   </tr>
                   <tr>
                     <th scope="col">Theatre Name</th>
-                    <td>{bookingDetails.theatre_name}</td>
+                    <td>{userContextData.bookingDetails.theatre_name}</td>
                   </tr>
                   <tr>
                     <th scope="col">Show details</th>
-                    <td>{bookingDetails.show_name}</td>
+                    <td>{userContextData.bookingDetails.show_name}</td>
                   </tr>
                   <tr>
                     <th scope="col">Booking Date</th>
-                    <td>{bookingDetails.book_date}</td>
+                    <td>{userContextData.bookingDetails.book_date}</td>
                   </tr>
                   <tr>
                     <th scope="col">Number of seats</th>
-                    <td>{""}</td>
+                    <td>{presentBooking.seat_count}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Seat Number</th>
+                    <td>{presentBooking.seat_numbers}</td>
                   </tr>
                   <tr>
                     <th scope="col">Amount</th>
-                    <td>{""}</td>
+                    <td>{presentBooking.ticket_price}</td>
                   </tr>
                 </tbody>
               </table>

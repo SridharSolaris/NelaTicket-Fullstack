@@ -8,14 +8,16 @@ import { config } from "../../Config";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faSquare } from "@fortawesome/free-solid-svg-icons";
 import "./Seatbooking.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Seatbooking(props) {
   const navigate = useNavigate();
-  const [movieData, setMovieData] = useState([]);
   const [seats, setSeats] = useState([]);
 
+  const {id} = useParams();
+
   const userContextData = useContext(UserContext);
+  const email = localStorage.getItem("email");
 
   function clickable(a) {
     const selectedid = document.getElementById(a).classList;
@@ -34,12 +36,20 @@ function Seatbooking(props) {
         key:"rzp_test_BRVxWrSVhyKh1m",
         amount: 110*100,
         currency: "INR",
-        name: `${props.mve_name}`,
+        name: `${userContextData.bookingDetails.mve_name}`,
         description: "Movie purchase on Rental",
         image: `${props.mve_poster}`,
         handler: () => {
             alert("Payment Done")
-            navigate("/")
+            const currentBookings = async () => {
+              const up = await axios.get(`${config.api}/bookings/booked/`)
+              const bookingId = up.data.at(-1)._id;
+              console.log(bookingId)
+              navigate(`/print/${bookingId}`)
+            }
+            currentBookings();
+            
+            
         },
         theme: {color: "#c4242d"}
     };
@@ -60,20 +70,17 @@ function Seatbooking(props) {
     onSubmit: async (values) => {
       console.log(values);
       try {
-        // const bookings = await axios.post(
-        //   `${config.api}/bookings/bookticket/${email}                               `,
-        //   values
-        // );
-
-        // console.log(bookings.data);
-
-        // alert(bookings.data.message);
+        const bookings = await axios.post(`${config.api}/bookings/bookticket/${email}/${id}`, values);
+        
+        
+        console.log(bookings);
+    
         
       } catch (error) {
         console.log(error);
-        // alert(error.response.data.message);
+        alert(error.response.data.message);
       }
-    },
+    },    
   });
 
   return (

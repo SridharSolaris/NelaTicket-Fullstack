@@ -49,24 +49,22 @@ const NavLg = () => {
 const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
 userContextData.setIsvisible(isAuthenticated);
 
-
-
     const home = () => {
-        
-        
         userContextData.setIsvisible(false);
         localStorage.clear();
         navigate("/");
     };
+
     return(
         <>
         <div className="container mx-auto px-4 flex items-center justify-between">
             <div className="flex items-center w-1/2">
                 <div className="w-36 h-8 mb-4">
+                    <a href="/">
                     <img 
                     src={NelaTicket} 
                     alt="logo" 
-                    className="w-full h-24 pb-4" />
+                    className="w-full h-24 pb-4" /></a>
                 </div>
                 <div className="w-full flex items-center bg-white gap-3 rounded-lg">
                     <BiSearch className="ml-4 w-4"/>

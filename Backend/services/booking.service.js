@@ -1,4 +1,5 @@
 import { client } from "../index.js";
+import { ObjectId } from "mongodb";
 
 export async function bookticket(
   data,
@@ -51,4 +52,13 @@ export async function getBookingsByEmail(email) {
     .collection("bookings")
     .find({ email: email })
     .toArray();
+}
+
+export async function getBookingById(bookingId) {
+  return await client
+    .db("bookmyshow")
+    .collection("bookings")
+    .findOne(
+      { _id: new ObjectId(bookingId) },
+    )
 }

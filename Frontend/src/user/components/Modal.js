@@ -89,7 +89,7 @@ export default function Modal() {
 
         userContextData.setBookingDetails(bookings.data);
 
-        navigate("/booking/");
+        navigate(`/booking/${id}`);
       } catch (error) {
         console.log(error);
         // alert(error.response.data.message);

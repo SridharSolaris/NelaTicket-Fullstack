@@ -1,5 +1,5 @@
 import express from "express";
-import { bookticket, getPrice, getAllBookings, getBookingsByEmail } from "../services/booking.service.js";
+import { bookticket, getPrice, getAllBookings, getBookingsByEmail, getBookingById } from "../services/booking.service.js";
 import { getmoviebyid } from "../services/movie.service.js";
 
 const router = express.Router();
@@ -46,6 +46,18 @@ router.post("/bookticket/:email/:mve_id", async (req, res) => {
   }
 });
 
+router.get("/booked/:bookingId", async (req, res) => {
+  const { bookingId } = req.params;
+
+  try {
+    const booking = await getBookingById(bookingId);
+    res.send(booking);
+    console.log(booking)
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+});
 
 router.get("/booked/:email", async (req, res) => {
   
